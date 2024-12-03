@@ -1,2 +1,0 @@
-class MainCourse < ApplicationRecord
-end
