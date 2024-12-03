@@ -112,12 +112,7 @@ GEM
     error_highlight (0.7.0)
     erubi (1.13.0)
     execjs (2.10.0)
-    ffi (1.17.0-aarch64-linux-gnu)
-    ffi (1.17.0-arm-linux-gnu)
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86-linux-gnu)
-    ffi (1.17.0-x86_64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.16.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -283,6 +278,7 @@ DEPENDENCIES
   capybara
   debug
   error_highlight (>= 0.4.0)
+  ffi (<= 1.16.0)
   importmap-rails
   pg (~> 1.1)
   puma (>= 5.0)
