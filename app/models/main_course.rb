@@ -1,0 +1,2 @@
+class MainCourse < ApplicationRecord
+end
