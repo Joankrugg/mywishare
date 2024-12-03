@@ -3,7 +3,26 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :share %>
+    <fieldset class="mb-3 radio_buttons required event_share">
+      <legend class="col-form-label pt-0">Share <abbr title="required">*</abbr></legend>
+      <% Share.all.sort_by(&:title).each do |share| %>
+        <div class="squaretag-item">
+          <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
+          <label class="form-check-label collection_radio_buttons" for="event_share_id_<%= share.id %>">
+            <% if share.photo.present? %>
+              <%= cl_image_tag share.photo.key, height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
+            <% else %>
+              <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
+            <% end %>
+            <%= share.title %>
+          </label>
+        </div>
+      <% end %>
+    </fieldset>
+
+
+
+
     <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
     <%= f.input :arrival %>
     <%= f.input :comment %>
