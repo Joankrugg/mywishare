@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   def index
     @events = Event.all
+
   end
 
   # GET /events/1
@@ -13,6 +14,9 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    Starter.all.each do |starter|
+      @event.event_starters.build(starter: starter, quantity: 0)
+    end
   end
 
   # GET /events/1/edit
@@ -53,6 +57,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id)
+      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy])
     end
 end

@@ -19,11 +19,20 @@
         </div>
       <% end %>
     </fieldset>
-
-
-
-
     <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
+    <h3>Starters</h3>
+    <%= f.simple_fields_for :event_starters do |es_form| %>
+      <div class="starter-fields">
+        <div class="row">
+          <div class="col-9">
+            <%= es_form.association :starter %>
+          </div>
+          <div class="col-3">
+            <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0 %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <%= f.input :arrival %>
     <%= f.input :comment %>
   </div>
