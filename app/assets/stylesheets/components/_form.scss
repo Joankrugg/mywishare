@@ -14,7 +14,6 @@
   font-weight: lighter;
   border-radius: 5px;
   padding: 5px 10px;
-  background-color: black;
   color: grey;
   border: 1px solid black;
   margin-right: 5px;
@@ -22,16 +21,24 @@
   transition: .3s ease-in-out;
 }
 .squaretag-selector:hover + label {
-  background-color: black;
+  background-color: #f9fafb;
   border: 1px solid black;
-  color: white;
+  color: grey;
 }
 
 .squaretag-selector:checked + label {
-  background-color: black;
-  color: white;
+  background-color: #f9fafb;
+  color: grey;
 }
 
 .share{
   display: none;
+}
+
+.section{
+  display: block;
+  width: 100%;
+  background-color: #f9fafb;
+  border-radius: 4px;
+  padding: 0.375rem 0.75rem;
 }

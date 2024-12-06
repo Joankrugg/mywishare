@@ -1,3 +1,4 @@
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
 
@@ -14,6 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.build_organizer
     Starter.all.each do |starter|
       @event.event_starters.build(starter: starter, quantity: 0)
     end
@@ -27,13 +29,19 @@ class EventsController < ApplicationController
   end
 
   # POST /events
+
   def create
-    @event = Event.new(event_params)
+    organizer_params = event_params[:organizer_attributes]
+    @organizer = Organizer.find_or_initialize_by(email: organizer_params[:email])
+    @organizer.assign_attributes(organizer_params) # Met à jour ou crée l'organisateur
+
+    @event = Event.new(event_params.except(:organizer_attributes))
+    @event.organizer = @organizer
 
     if @event.save
-      redirect_to @event, notice: "Event was successfully created."
+      redirect_to @event, notice: 'Événement créé avec succès.'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -60,6 +68,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy], event_desserts_attributes: [:dessert_id, :quantity, :_destroy])
+      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy], event_desserts_attributes: [:dessert_id, :quantity, :_destroy], organizer_attributes: [:first_name, :last_name, :email, :phone_number])
     end
 end

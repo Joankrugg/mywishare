@@ -22,43 +22,43 @@
       </fieldset>
       <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
       <div class="row" style="margin-bottom: 20px;">
-        <div class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Starters
+        <div class="col-12">
+          <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Starters
+          </div>
         </div>
       </div>
       <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          <%= f.simple_fields_for :event_starters do |es_form| %>
-            <div class="starter-fields">
-              <div class="row">
-                <div class="col-9">
-                  <%= es_form.object.starter.title %>
-                  (<%= es_form.object.starter.price %> €)
-                </div>
-                <div class="col-3">
-                  <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0, label: false  %>
-                </div>
+        <%= f.simple_fields_for :event_starters do |es_form| %>
+          <div class="starter-fields">
+            <div class="row">
+              <div class="col-9">
+                <%= es_form.association :starter, label: false %>
+              </div>
+              <div class="col-3">
+                <%= es_form.input :quantity, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <div class="row" style="margin-bottom: 20px;">
-        <div class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDessert" aria-expanded="false" aria-controls="collapseDessert">
-          Desserts
+        <div class="col-12">
+          <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDessert" aria-expanded="false" aria-controls="collapseDessert">
+            Desserts
+          </div>
         </div>
       </div>
       <div class="collapse" id="collapseDessert">
         <div class="card card-body">
           <%= f.simple_fields_for :event_desserts do |es_form| %>
-            <div class="starter-fields">
+            <div class="dessert-fields">
               <div class="row">
                 <div class="col-9">
-                  <%= es_form.object.dessert.title %>
-                  (<%= es_form.object.dessert.price %> €)
+                  <%= es_form.association :dessert, label: false %>
                 </div>
                 <div class="col-3">
-                  <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0, label: false  %>
+                  <%= es_form.input :quantity, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
                 </div>
               </div>
             </div>
@@ -66,6 +66,13 @@
         </div>
       </div>
       <%= f.input :arrival %>
+      <h3>Informations sur l'organisateur</h3>
+      <%= f.simple_fields_for :organizer do |organizer_form| %>
+        <%= organizer_form.input :first_name, label: "Prénom" %>
+        <%= organizer_form.input :last_name, label: "Nom" %>
+        <%= organizer_form.input :email, label: "Email" %>
+        <%= organizer_form.input :phone_number, label: "Numéro de téléphone" %>
+      <% end %>
       <%= f.input :comment %>
     </div>
 
