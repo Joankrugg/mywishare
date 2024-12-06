@@ -26,17 +26,17 @@ require 'csv'
 
 #puts "Shares imported successfully!"
 
-csv_file_path = Rails.root.join('db', 'seeds', 'starters.csv')
+csv_file_path = Rails.root.join('db', 'seeds', 'desserts.csv')
 
 # Lire et importer le fichier CSV
-puts "Importing starters from CSV..."
+puts "Importing desserts from CSV..."
 
 CSV.foreach(csv_file_path, headers: true) do |row|
   # Crée ou met à jour une instance du modèle Share
-  Starter.find_or_create_by!(
+  Dessert.find_or_create_by!(
     title: row['title'].strip,
     price: row['price'].to_f,
   )
 end
 
-puts "Starters imported successfully!"
+puts "Desserts imported successfully!"

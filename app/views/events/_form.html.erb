@@ -1,43 +1,76 @@
-<%= simple_form_for(@event) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="container">
+  <%= simple_form_for(@event) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <fieldset class="mb-3 radio_buttons required event_share">
-      <legend class="col-form-label pt-0">Share <abbr title="required">*</abbr></legend>
-      <% Share.all.sort_by(&:title).each do |share| %>
-        <div class="squaretag-item">
-          <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
-          <label class="form-check-label collection_radio_buttons" for="event_share_id_<%= share.id %>">
-            <% if share.photo.present? %>
-              <%= cl_image_tag share.photo.key, height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
-            <% else %>
-              <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
-            <% end %>
-            <%= share.title %>
-          </label>
-        </div>
-      <% end %>
-    </fieldset>
-    <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
-    <h3>Starters</h3>
-    <%= f.simple_fields_for :event_starters do |es_form| %>
-      <div class="starter-fields">
-        <div class="row">
-          <div class="col-9">
-            <%= es_form.association :starter %>
+    <div class="form-inputs">
+      <fieldset class="mb-3 radio_buttons required event_share">
+        <legend class="col-form-label pt-0">Share <abbr title="required">*</abbr></legend>
+        <% Share.all.sort_by(&:title).each do |share| %>
+          <div class="squaretag-item">
+            <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
+            <label class="form-check-label collection_radio_buttons" for="event_share_id_<%= share.id %>">
+              <% if share.photo.present? %>
+                <%= cl_image_tag share.photo.key, height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
+              <% else %>
+                <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 20, width: 25, crop: :fill, class: 'img-fluid beyond' %>
+              <% end %>
+              <%= share.title %>
+            </label>
           </div>
-          <div class="col-3">
-            <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0 %>
-          </div>
+        <% end %>
+      </fieldset>
+      <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Starters
         </div>
       </div>
-    <% end %>
-    <%= f.input :arrival %>
-    <%= f.input :comment %>
-  </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <%= f.simple_fields_for :event_starters do |es_form| %>
+            <div class="starter-fields">
+              <div class="row">
+                <div class="col-9">
+                  <%= es_form.object.starter.title %>
+                  (<%= es_form.object.starter.price %> €)
+                </div>
+                <div class="col-3">
+                  <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0, label: false  %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDessert" aria-expanded="false" aria-controls="collapseDessert">
+          Desserts
+        </div>
+      </div>
+      <div class="collapse" id="collapseDessert">
+        <div class="card card-body">
+          <%= f.simple_fields_for :event_desserts do |es_form| %>
+            <div class="starter-fields">
+              <div class="row">
+                <div class="col-9">
+                  <%= es_form.object.dessert.title %>
+                  (<%= es_form.object.dessert.price %> €)
+                </div>
+                <div class="col-3">
+                  <%= es_form.input :quantity, input_html: { min: 0 }, label: "Quantité", default: 0, label: false  %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%= f.input :arrival %>
+      <%= f.input :comment %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>

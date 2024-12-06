@@ -17,6 +17,9 @@ class EventsController < ApplicationController
     Starter.all.each do |starter|
       @event.event_starters.build(starter: starter, quantity: 0)
     end
+    Dessert.all.each do |dessert|
+      @event.event_desserts.build(dessert: dessert, quantity: 0)
+    end
   end
 
   # GET /events/1/edit
@@ -57,6 +60,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy])
+      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy], event_desserts_attributes: [:dessert_id, :quantity, :_destroy])
     end
 end
