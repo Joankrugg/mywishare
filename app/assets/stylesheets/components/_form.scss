@@ -27,8 +27,8 @@
 }
 
 .squaretag-selector:checked + label {
-  background-color: #f9fafb;
-  color: grey;
+  background-color: #cb5627;
+  color: white;
 }
 
 .share{
@@ -41,4 +41,14 @@
   background-color: #f9fafb;
   border-radius: 4px;
   padding: 0.375rem 0.75rem;
+}
+.form-actions{
+  position: relative;
+}
+.booking{
+  position: absolute;
+  right: 0;
+  background-color: #cb5627;
+  color: white;
+  border-radius: 4px;
 }
