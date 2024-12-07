@@ -89,7 +89,23 @@
         <% end %>
       </div>
     </div>
-    <%= f.input :arrival %>
+    <div class="form-group">
+      <%= f.input :date,
+        collection: available_dates(0, 3),
+        label: "Choisissez une date",
+        prompt: "Sélectionnez une date",
+        as: :select %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :time_slot,
+        collection: available_time_slots,
+        label: "Choisissez un créneau horaire",
+        prompt: "Sélectionnez une heure",
+        as: :select %>
+    </div>
+
+
     <h3 style='color: #cb5627;'>Informations sur l'organisateur</h3>
     <%= f.simple_fields_for :organizer do |organizer_form| %>
       <%= organizer_form.input :last_name, label: "Nom", required: false %>
@@ -104,4 +120,5 @@
     <%= f.button :submit, 'Envoyez votre demande', class: 'booking' %>
   </div>
 <% end %>
+
 
