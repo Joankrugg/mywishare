@@ -3,14 +3,28 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <fieldset class="mb-3 radio_buttons required event_share">
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-12">
+        <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGuest" aria-expanded="false" aria-controls="collapseGuest">
+          Combien de personnes seront présentes ?
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+    <div class="collapse" id="collapseGuest">
+      <div class="row">
+        <div class="col-12">
+          <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
+        </div>
+      </div>
+    </div>
+
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-12">
         <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShare" aria-expanded="false" aria-controls="collapseShare">
           Choisissez le thème de votre partage
           <i class="fa-solid fa-chevron-down"></i>
         </div>
-
       </div>
     </div>
     <div class="collapse" id="collapseShare">
@@ -28,16 +42,16 @@
         </div>
       <% end %>
     </div>
-    </fieldset>
-    <%= f.input :number_of_guests, input_html: { min: 2, max: 50 } %>
+
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-12">
-        <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Starters
+        <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStarter" aria-expanded="false" aria-controls="collapseStarter">
+          Choisissez vos entrées et le nombre de parts
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
       </div>
     </div>
-    <div class="collapse" id="collapseExample">
+    <div class="collapse" id="collapseStarter">
       <%= f.simple_fields_for :event_starters do |es_form| %>
         <div class="starter-fields">
           <div class="row">
@@ -54,7 +68,8 @@
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-12">
         <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDessert" aria-expanded="false" aria-controls="collapseDessert">
-          Desserts
+          Choisissez vos desserts et nombre de parts
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
       </div>
     </div>
