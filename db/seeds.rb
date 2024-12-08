@@ -10,21 +10,21 @@
 require 'csv'
 
 # Définir le chemin vers le fichier CSV
-#csv_file_path = Rails.root.join('db', 'seeds', 'shares.csv')
+csv_file_path = Rails.root.join('db', 'seeds', 'shares.csv')
 
 # Lire et importer le fichier CSV
-#puts "Importing shares from CSV..."
+puts "Importing shares from CSV..."
 
-#CSV.foreach(csv_file_path, headers: true) do |row|
-#  Share.find_or_create_by!(
-#    title: row['title'].strip,
-#    description: row['description'].strip,
-#    price: row['price'].to_f,
-#    signature: row['signature'].present? ? row['signature'].strip : " "
-#  )
-#end
+CSV.foreach(csv_file_path, headers: true) do |row|
+  Share.find_or_create_by!(
+    title: row['title'].strip,
+    description: row['description'].strip,
+    price: row['price'].to_f,
+    signature: row['signature'].present? ? row['signature'].strip : " "
+  )
+end
 
-#puts "Shares imported successfully!"
+puts "Shares imported successfully!"
 
 csv_file_path = Rails.root.join('db', 'seeds', 'starters.csv')
 

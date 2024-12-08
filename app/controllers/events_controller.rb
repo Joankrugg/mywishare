@@ -36,6 +36,7 @@ class EventsController < ApplicationController
     @event.organizer = @organizer
 
     if @event.save
+      RestaurantMailer.notification(@event).deliver_now
       redirect_to @event, notice: 'Événement créé avec succès.'
     else
       render :new

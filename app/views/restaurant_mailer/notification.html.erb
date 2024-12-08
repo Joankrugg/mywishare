@@ -1,9 +1,7 @@
-<div id="<%= dom_id event %>">
-  <div class="container">
-    <h1 class="text-center">Mywishare</h1>
+    <h1>Mywishare</h1>
 
     <h2>Votre Partage</h2>
-    <% if @event.share %>
+    <% if @event.share.present? %>
       <p>
         <strong>Nom :</strong> <%= @event.share.title %>
       </p>

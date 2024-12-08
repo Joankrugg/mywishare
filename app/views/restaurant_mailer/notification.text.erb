@@ -1,0 +1,76 @@
+Mywishare
+Votre Partage
+<% if @event.share.present? %>
+  Nom : <%= @event.share.title %>
+
+  Description : <%= @event.share.description %>
+
+  Nombre d'invités : <%= @event.number_of_guests %>
+
+  Prix : <%= number_to_currency(@event.share.price) %>
+
+  Total : <%= @event.number_of_guests * @event.share.price %>
+<% else %>
+  Aucun partage associ
+<% end %>
+
+Vos choix d'entrées
+<% if @event.event_starters.any? %>
+  <% @event.event_starters.each do |event_starter| %>
+    <% if event_starter.quantity > 0 %>
+
+      Entrée : <%= event_starter.starter.title %>
+      (<%= number_to_currency(event_starter.starter.price) %> par unité)
+
+      Quantité : <%= event_starter.quantity %>
+
+      Total : <%= number_to_currency(event_starter.quantity * event_starter.starter.price) %>
+    <% end %>
+  <% end %>
+<% else %>
+  Aucune entrée sélectionné
+<% end %>
+Vos choix de desserts
+  <% if @event.event_desserts.any? %>
+    <% @event.event_desserts.each do |event_dessert| %>
+      <% if event_dessert.quantity > 0 %>
+
+        Dessert : <%= event_dessert.dessert.title %>
+        (<%= number_to_currency(event_dessert.dessert.price) %> par unité)
+
+
+        Quantité : <%= event_dessert.quantity %>
+
+
+        Total : <%= number_to_currency(event_dessert.quantity * event_dessert.dessert.price) %>
+    <% end %>
+  <% end %>
+<% else %>
+  Aucun dessert sélectionn
+<% end %>
+
+Votre arrivée : <%= @event.arrival %>
+
+Commentaire : <%= @event.comment.presence || "Aucun commentaire" %>
+
+Organisateur
+
+<% if @event.organizer %>
+
+  Nom : <%= "#{@event.organizer.first_name} #{@event.organizer.last_name}" %>
+
+  Email : <%= @event.organizer.email %>
+
+  Téléphone : <%= @event.organizer.phone_number %>
+
+<% else %>
+  Aucun organisateur défini.
+<% end %>
+
+Total global
+
+Prix total : <%= number_to_currency(@event.total_price) if @event.respond_to?(:total_price) %>
+
+
+
+
