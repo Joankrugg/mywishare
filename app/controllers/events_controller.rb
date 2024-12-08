@@ -1,7 +1,6 @@
-
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[ show update destroy ]
 
   # GET /events
   def index
@@ -25,9 +24,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1/edit
-  def edit
-  end
 
   # POST /events
 
@@ -63,12 +59,14 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:starter_id, :quantity, :_destroy], event_desserts_attributes: [:dessert_id, :quantity, :_destroy], organizer_attributes: [:first_name, :last_name, :email, :phone_number])
-    end
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:number_of_guests, :arrival, :comment, :share_id, event_starters_attributes: [:id, :starter_id, :quantity, :_destroy], event_desserts_attributes: [:dessert_id, :quantity, :_destroy], organizer_attributes: [:first_name, :last_name, :email, :phone_number])
+  end
+
 end
+
