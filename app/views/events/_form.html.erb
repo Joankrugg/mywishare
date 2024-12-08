@@ -119,20 +119,10 @@
       </div>
     </div>
     <div class="form-group">
-      <%= f.input :date,
-        collection: available_dates(0, 3),
-        label: "Choisissez une date",
-        prompt: "Sélectionnez une date",
-        as: :select %>
+      <%= f.label :arrival, "Date et heure d'arrivée" %>
+      <%= f.datetime_local_field :arrival, id: "arrival-picker", class: "form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.input :time_slot,
-        collection: available_time_slots,
-        label: "Choisissez un créneau horaire",
-        prompt: "Sélectionnez une heure",
-        as: :select %>
-    </div>
 
 
     <h3 style='color: #cb5627;'>Informations sur l'organisateur</h3>
@@ -149,5 +139,43 @@
     <%= f.button :submit, 'Envoyez votre demande', class: 'booking' %>
   </div>
 <% end %>
+
+<script >
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialisation de Flatpickr avec les options souhaitées
+    flatpickr("#arrival-picker", {
+      disable: [
+        function (date) {
+          // Désactiver les dimanches (0), lundis (1), mardis (2), mercredis (3)
+          return [0, 1, 2, 3].includes(date.getDay());
+        },
+      ],
+      enableTime: true,             // Active la sélection d'heure
+      time_24hr: true,              // Format 24h
+      dateFormat: "Y-m-d H:i",      // Format pour inclure la date et l'heure
+      locale: "fr",                 // Localisation en français
+      minDate: "today",             // Empêche la sélection des dates passées
+      onChange: function (selectedDates, dateStr, instance) {
+        // Vérifie les créneaux horaires
+        const selectedDate = selectedDates[0];
+        if (selectedDate) {
+          const hours = selectedDate.getHours();
+          const minutes = selectedDate.getMinutes();
+          const valid =
+            (hours >= 12 && hours < 14) || // Créneau 12h à 14h
+            (hours >= 19 && (hours < 21 || (hours === 21 && minutes <= 30))); // Créneau 19h à 21h30
+
+          // Si l'heure sélectionnée n'est pas valide, réinitialiser le champ
+          if (!valid) {
+            alert("Veuillez sélectionner un créneau entre 12h-14h ou 19h-21h30.");
+            instance.clear();
+          }
+        }
+      },
+    });
+  });
+
+
+</script>
 
 
