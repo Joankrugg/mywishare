@@ -119,20 +119,19 @@
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :arrival, "Date et heure d'arrivée" %>
-      <%= f.datetime_local_field :arrival, id: "arrival-picker", class: "form-control" %>
+      <%= f.datetime_local_field :arrival, id: "arrival-picker", class: "form-control", placeholder: "Date et heure d'arrivée" %>
     </div>
 
 
 
     <h3 style='color: #cb5627;'>Informations sur l'organisateur</h3>
     <%= f.simple_fields_for :organizer do |organizer_form| %>
-      <%= organizer_form.input :last_name, label: "Nom", required: false %>
-      <%= organizer_form.input :first_name, label: "Prénom", required: false %>
-      <%= organizer_form.input :phone_number, label: "Numéro de téléphone", required: false %>
-      <%= organizer_form.input :email, label: "Email", required: false %>
+      <%= organizer_form.input :last_name, label: false, placeholder: "Nom", required: false %>
+      <%= organizer_form.input :first_name, label: false, placeholder: "Prénom", required: false %>
+      <%= organizer_form.input :phone_number, label: false, placeholder: "Numéro de téléphone", required: false %>
+      <%= organizer_form.input :email, label: false, placeholder: "Email", required: false %>
     <% end %>
-    <%= f.input :comment %>
+    <%= f.input :comment, label: false, placeholder: "Ajoutez ici vos souhaits, précisions, éventuelles allergies...", required: false %>
   </div>
 
   <div class="form-actions">
