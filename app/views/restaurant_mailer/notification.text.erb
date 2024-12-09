@@ -11,7 +11,7 @@ Le Partage
 
   Total : <%= @event.number_of_guests * @event.share.price %>€
 <% else %>
-  Aucun partage associ
+  Aucun partage associé
 <% end %>
 
 Vos choix d'entrées
@@ -25,27 +25,29 @@ Vos choix d'entrées
       Quantité : <%= event_starter.quantity %>
 
       Total : <%= event_starter.quantity * event_starter.starter.price %>€
-    <% else %>
-      Aucune entrée sélectionnée
+
     <% end %>
   <% end %>
+<% else %>
+  Aucune entrée sélectionnée
 <% end %>
+
 Vos choix de desserts
-  <% if @event.event_desserts.any? %>
-    <% @event.event_desserts.each do |event_dessert| %>
-      <% if event_dessert.quantity > 0 %>
+<% if @event.event_desserts.any? %>
+  <% @event.event_desserts.each do |event_dessert| %>
+    <% if event_dessert.quantity > 0 %>
 
-        Dessert : <%= event_dessert.dessert.title %>
-        (<%= event_dessert.dessert.price %>€ par part)
+      Dessert : <%= event_dessert.dessert.title %>
+      (<%= event_dessert.dessert.price %>€ par part)
 
-        Quantité : <%= event_dessert.quantity %>
+      Quantité : <%= event_dessert.quantity %>
 
-        Total : <%= event_dessert.quantity * event_dessert.dessert.price %>€
-    <% else %>
-      Aucun dessert sélectionn
+      Total : <%= event_dessert.quantity * event_dessert.dessert.price %>€
+
     <% end %>
   <% end %>
-
+<% else %>
+  Aucun dessert sélectionné
 <% end %>
 
 Jour et heure d'arrivée : <%= @event.arrival %>

@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://kit.fontawesome.com/fa92077db5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,5 +18,48 @@
     <%= render "shared/flashes" %>
     <%= render 'shared/navbar' %>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+      document.addEventListener("turbo:load", function () {
+        // Vérifie si le datepicker existe sur la page
+        const arrivalPicker = document.getElementById("arrival-picker");
+        if (arrivalPicker) {
+          flatpickr(arrivalPicker, {
+            disable: [
+              function (date) {
+                // Désactiver dimanches (0), lundis (1), mardis (2), mercredis (3)
+                return [0, 1, 2, 3].includes(date.getDay());
+              },
+            ],
+            enableTime: true,             // Active la sélection d'heure
+            time_24hr: true,              // Format 24h
+            dateFormat: "Y-m-d H:i",      // Format pour inclure la date et l'heure
+            locale: "fr",                 // Localisation en français
+            minDate: "today",             // Empêche la sélection des dates passées
+            enableSeconds: false,         // Désactive les secondes
+            minuteIncrement: 30,          // Incréments de 30 minutes
+            // Limiter les plages horaires sélectionnables
+            minTime: "12:00",
+            maxTime: "21:30",
+            onChange: function (selectedDates, dateStr, instance) {
+              const selectedDate = selectedDates[0];
+              if (selectedDate) {
+                const hours = selectedDate.getHours();
+                const minutes = selectedDate.getMinutes();
+                const valid =
+                  (hours >= 12 && hours < 14) || // Créneau 12h à 14h
+                  (hours >= 19 && (hours < 21 || (hours === 21 && minutes <= 30))); // Créneau 19h à 21h30
+
+                if (!valid) {
+                  alert("Veuillez sélectionner un créneau entre 12h-14h ou 19h-21h30.");
+                  instance.clear();
+                }
+              }
+            },
+          });
+        }
+      });
+    </script>
   </body>
 </html>

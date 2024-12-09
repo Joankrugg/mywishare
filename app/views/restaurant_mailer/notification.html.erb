@@ -37,10 +37,10 @@
           Total : <%= event_starter.quantity * event_starter.starter.price %> €
         </p>
       </div>
-    <% else %>
-      <p>Aucune entrée sélectionnée.</p>
     <% end %>
   <% end %>
+<% else %>
+  <p>Aucune entrée sélectionnée.</p>
 <% end %>
 
 <h2>Vos choix de desserts</h2>
@@ -59,10 +59,10 @@
           Total : <%= event_dessert.quantity * event_dessert.dessert.price %>€
         </p>
       </div>
-    <% else %>
-      <p>Aucun dessert sélectionné.</p>
     <% end %>
   <% end %>
+<% else %>
+  <p>Aucun dessert sélectionné.</p>
 <% end %>
 
 <p>
