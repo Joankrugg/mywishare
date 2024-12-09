@@ -1,5 +1,57 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Events</h1>
-
-<%= link_to "New event", new_event_path %>
+<div class="container">
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-4 col-lg-6 mx-auto">
+      <%= image_tag 'https://editor-bee.s3.eu-central-1.amazonaws.com/images/979422b2-8079-4014-8c87-8c1540c085d7/LOGO/Mywishare_Logo_Responsive_RVB_Color.png', width: 180, crop: :fit, class: 'img-fluid', style: 'display: block; margin: auto' %>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-4 col-lg-6 mx-auto">
+      <p style='text-align: center;'>Envies de partages</p>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="pack" style='display: block; width: 470px; margin: auto;'>
+      <%= image_tag'https://editor-bee.s3.eu-central-1.amazonaws.com/images/979422b2-8079-4014-8c87-8c1540c085d7/LOGO/Mywishare_Logo_Horizontal_RVB_Color.png', width: 160, crop: :fit, class: 'img-fluid' %>
+      s’invite à Raba pour une grande première
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-12 col-lg-8 mx-auto">
+      <%= image_tag "https://editor-bee.s3.eu-central-1.amazonaws.com/images/979422b2-8079-4014-8c87-8c1540c085d7/MYWISHARE/RABA%20-%20MYWISHARE%203.png", width: 1080, crop: :fit, class: 'img-fluid'%>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-12 col-lg-8 mx-auto">
+      <p style='text-align: center;'>Avec MYWISHARE le partage est au cœur de l’expérience. Ce nouveau concept de restauration, propose une carte riche de plus de 40 plats authentiques et régressifs, accompagnés de 20 entrées et de 20 desserts. Inspirés par les recettes des plus grands chefs ou de la plus grande tradition, ces plats sont conçus pour être savourés ensemble, autour de grandes tables conviviales et de saveurs généreuses. Que vous soyez deux ou trente, venez sans souci. Tout est fait maison et préparé dans l’instant pour vous… c’est pourquoi il est indispensable de commander à l’avance pour une expérience personnalisée et inoubliable.</p>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-12 col-sm-6 col-lg-3 mx-auto">
+      <h4 style='text-align: center; color: #cb5627'>Vous composez</h4>
+      <p style='text-align: center;'>Sur l'app, créez votre repas idéal en sélectionnant parmi nos plats généreux et authentiques..</p>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3 mx-auto">
+      <h4 style='text-align: center; color: #cb5627'>Vous réservez</h4>
+      <p style='text-align: center;'>Validez votre sélection directement sur l'application pour tout organisateur en quelques clics.</p>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3 mx-auto">
+      <h4 style='text-align: center; color: #cb5627'>Nous cuisinons</h4>
+      <p style='text-align: center;'>Nos chefs se mettent à l'œuvre pour préparer chaque plat avec soin et passion, un délai de 72 heures garantit la perfection à chaque bouchée.</p>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3 mx-auto">
+      <h4 style='text-align: center; color: #cb5627'>Vous partagez</h4>
+      <p style='text-align: center;'>Et voici le meilleur moment ! Installez-vous autour de nos grandes tables et savourez chaque instant, entouré de vos proches.</p>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 50px;">
+    <div class="col-8 col-lg-4 mx-auto">
+      <%= link_to new_event_path do %>
+        <div class="btn" style='background: #cb5627; color: white; width: 200px; display: block; margin: auto; text-decoration:none'>COMPOSEZ</div>
+      <% end %>
+    </div>
+  </div>
+</div>
