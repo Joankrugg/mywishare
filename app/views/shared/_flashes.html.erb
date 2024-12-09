@@ -1,12 +1,42 @@
 <% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <%= notice %>
+  <div id="flash-notice-wrapper" class="alert alert-info alert-dismissible" role="alert">
+    <div class="message"> <%= notice %></div>
   </div>
 <% end %>
 <% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <%= alert %>
+  <div id="flash-alert-wrapper" class="alert alert-warning alert-dismissible" role="alert">
+    <div class="advice"><%= alert %></div>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Gestion du flash-notice-wrapper
+    setTimeout(function () {
+      const flashNoticeWrapper = document.getElementById("flash-notice-wrapper");
+      if (flashNoticeWrapper) {
+        flashNoticeWrapper.style.transition = "opacity 0.5s";
+        flashNoticeWrapper.style.opacity = "0";
+
+        // Supprime l'élément après l'animation
+        flashNoticeWrapper.addEventListener("transitionend", function () {
+          flashNoticeWrapper.remove();
+        });
+      }
+    }, 2000);
+
+    // Gestion du flash-alert-wrapper
+    setTimeout(function () {
+      const flashAlertWrapper = document.getElementById("flash-alert-wrapper");
+      if (flashAlertWrapper) {
+        flashAlertWrapper.style.transition = "opacity 0.5s";
+        flashAlertWrapper.style.opacity = "0";
+
+        // Supprime l'élément après l'animation
+        flashAlertWrapper.addEventListener("transitionend", function () {
+          flashAlertWrapper.remove();
+        });
+      }
+    }, 3000);
+  });
+</script>

@@ -1,101 +1,99 @@
 <div id="<%= dom_id event %>">
   <div class="container">
-    <h1 class="text-center">Mywishare</h1>
+    <div class="row">
+      <div class="col-12 col-lg-9 mx-auto">
+        <div class="card" style='padding: 20px; margin-top: 30px;'>
+          <h1 style='color: #cb5627'>mywishare</h1>
 
-    <h2>Votre Partage</h2>
-    <% if @event.share %>
-      <p>
-        <strong>Nom :</strong> <%= @event.share.title %>
-      </p>
-      <p>
-        <strong>Description :</strong> <%= @event.share.description %>
-      </p>
-      <p>
-        <strong>Nombre d'invités :</strong> <%= @event.number_of_guests %>
-      </p>
-      <p>
-        <strong>Prix :</strong> <%= number_to_currency(@event.share.price) %>
-      </p>
-      <p>
-        Total : <%= @event.number_of_guests * @event.share.price %>
-      </p>
-    <% else %>
-      <p>Aucun partage associé.</p>
-    <% end %>
-
-    <h2>Vos choix d'entrées</h2>
-    <% if @event.event_starters.any? %>
-      <% @event.event_starters.each do |event_starter| %>
-        <% if event_starter.quantity > 0 %>
-          <div>
+          <h2 style='color: #cb5627'>Votre Partage</h2>
+          <% if @event.share %>
             <p>
-              <strong>Entrée :</strong> <%= event_starter.starter.title %>
-              (<%= number_to_currency(event_starter.starter.price) %> par unité)
+              <strong><%= @event.share.title %></strong>
             </p>
             <p>
-              Quantité : <%= event_starter.quantity %>
+              <strong>Description :</strong> <%= @event.share.description %>
             </p>
             <p>
-              Total : <%= number_to_currency(event_starter.quantity * event_starter.starter.price) %>
-            </p>
-          </div>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>Aucune entrée sélectionnée.</p>
-    <% end %>
-
-    <h2>Vos choix de desserts</h2>
-    <% if @event.event_desserts.any? %>
-      <% @event.event_desserts.each do |event_dessert| %>
-        <% if event_dessert.quantity > 0 %>
-          <div>
-            <p>
-              <strong>Dessert :</strong> <%= event_dessert.dessert.title %>
-              (<%= number_to_currency(event_dessert.dessert.price) %> par unité)
+              <strong>Nombre de personnes :</strong> <%= @event.number_of_guests %>
             </p>
             <p>
-              Quantité : <%= event_dessert.quantity %>
+              <strong>Prix par personne</strong> <%= @event.share.price %>€
             </p>
             <p>
-              Total : <%= number_to_currency(event_dessert.quantity * event_dessert.dessert.price) %>
+              Total : <%= @event.number_of_guests * @event.share.price %>€
             </p>
-          </div>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>Aucun dessert sélectionné.</p>
-    <% end %>
+          <% else %>
+            <p>Aucun partage associé.</p>
+          <% end %>
 
-    <p>
-      <strong>Votre arrivée :</strong> <%= @event.arrival %>
-    </p>
-    <p>
-      <strong>Commentaire :</strong> <%= @event.comment.presence || "Aucun commentaire" %>
-    </p>
+          <h2 style='color: #cb5627'>Vos choix d'entrées</h2>
+          <% if @event.event_starters.any? %>
+            <% @event.event_starters.each do |event_starter| %>
+              <% if event_starter.quantity > 0 %>
+                <div>
+                  <p>
+                    <strong>Entrée :</strong> <%= event_starter.starter.title %>
+                    (<%= event_starter.starter.price %> € par part)
+                  </p>
+                  <p>
+                    Quantité : <%= event_starter.quantity %>
+                  </p>
+                  <p>
+                    Total : <%= event_starter.quantity * event_starter.starter.price %>€
+                  </p>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>Aucune entrée sélectionnée.</p>
+          <% end %>
 
-    <h2>Organisateur</h2>
-    <% if @event.organizer %>
-      <p>
-        <strong>Nom :</strong> <%= "#{@event.organizer.first_name} #{@event.organizer.last_name}" %>
-      </p>
-      <p>
-        <strong>Email :</strong> <%= @event.organizer.email %>
-      </p>
-      <p>
-        <strong>Téléphone :</strong> <%= @event.organizer.phone_number %>
-      </p>
-    <% else %>
-      <p>Aucun organisateur défini.</p>
-    <% end %>
+          <h2 style='color: #cb5627'>Vos choix de desserts</h2>
+          <% if @event.event_desserts.any? %>
+            <% @event.event_desserts.each do |event_dessert| %>
+              <% if event_dessert.quantity > 0 %>
+                <div>
+                  <p>
+                    <strong>Dessert :</strong> <%= event_dessert.dessert.title %>
+                    (<%= event_dessert.dessert.price %>€ par part)
+                  </p>
+                  <p>
+                    Quantité : <%= event_dessert.quantity %>
+                  </p>
+                  <p>
+                    Total : <%= event_dessert.quantity * event_dessert.dessert.price %>€
+                  </p>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>Aucun dessert sélectionné.</p>
+          <% end %>
 
+          <p>
+            <strong>Votre arrivée :</strong> <%= @event.arrival %>
+          </p>
+          <p>
+            <strong>Commentaire :</strong> <%= @event.comment.presence || "Aucun commentaire" %>
+          </p>
 
+          <h2 style='color: #cb5627'>Organisateur</h2>
+          <% if @event.organizer %>
+            <p>
+              <strong>Nom :</strong> <%= "#{@event.organizer.first_name} #{@event.organizer.last_name}" %>
+            </p>
+            <p>
+              <strong>Email :</strong> <%= @event.organizer.email %>
+            </p>
+            <p>
+              <strong>Téléphone :</strong> <%= @event.organizer.phone_number %>
+            </p>
+          <% else %>
+            <p>Aucun organisateur défini.</p>
+          <% end %>
 
-    <h2>Total global</h2>
-    <p>
-      <strong>Prix total :</strong> <%= number_to_currency(@event.total_price) if @event.respond_to?(:total_price) %>
-    </p>
-
-
+        </div>
+      </div>
+    </div>
   </div>
 </div>
