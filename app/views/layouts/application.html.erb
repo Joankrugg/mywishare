@@ -26,22 +26,18 @@
         const arrivalPicker = document.getElementById("arrival-picker");
         if (arrivalPicker) {
           flatpickr(arrivalPicker, {
+            locale: "fr",                 // Localisation en français
+            enableTime: true,             // Active la sélection d'heure
+            time_24hr: true,              // Format 24h
+            dateFormat: "Y-m-d H:i",      // Format pour inclure la date et l'heure
+            minDate: new Date().fp_incr(3), // Empêche la sélection des dates avant 3 jours
+            minuteIncrement: 30,          // Incréments de 30 minutes
             disable: [
               function (date) {
                 // Désactiver dimanches (0), lundis (1), mardis (2), mercredis (3)
                 return [0, 1, 2, 3].includes(date.getDay());
               },
             ],
-            enableTime: true,             // Active la sélection d'heure
-            time_24hr: true,              // Format 24h
-            dateFormat: "Y-m-d H:i",      // Format pour inclure la date et l'heure
-            locale: "fr",                 // Localisation en français
-            minDate: "today",             // Empêche la sélection des dates passées
-            enableSeconds: false,         // Désactive les secondes
-            minuteIncrement: 30,          // Incréments de 30 minutes
-            // Limiter les plages horaires sélectionnables
-            minTime: "12:00",
-            maxTime: "21:30",
             onChange: function (selectedDates, dateStr, instance) {
               const selectedDate = selectedDates[0];
               if (selectedDate) {
@@ -53,7 +49,7 @@
 
                 if (!valid) {
                   alert("Veuillez sélectionner un créneau entre 12h-14h ou 19h-21h30.");
-                  instance.clear();
+                  instance.clear(); // Efface la sélection invalide
                 }
               }
             },
@@ -61,5 +57,6 @@
         }
       });
     </script>
+
   </body>
 </html>
