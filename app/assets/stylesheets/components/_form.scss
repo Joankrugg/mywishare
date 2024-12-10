@@ -32,6 +32,27 @@
 .share{
   display: none;
 }
+
+.mobile-only {
+  display: none;
+}
+
+/* Cacher la version desktop sur mobile */
+.desktop-only {
+  display: inline;
+}
+
+/* Sur les petits écrans, afficher la version mobile et cacher la version desktop */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: inline;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
 .beyond{
   border-radius: 3px;
 }
