@@ -18,14 +18,14 @@
         <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
         <label class="form-check-label collection_radio_buttons product-card" for="event_share_id_<%= share.id %>">
           <div class="row">
-            <div class="col-2 col-lg-1">
+            <div class="col-3 col-lg-1">
               <% if share.photo.present? %>
                 <%= cl_image_tag share.photo.key, height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
               <% else %>
                 <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
               <% end %>
             </div>
-            <div class="col-7 col-lg-8">
+            <div class="col-7 col-lg-9">
               <p class="desktop-only" style="color: #cb5627;"><%= share.title %></p>
               <% if share.title.length > 23 %>
                 <p class="mobile-only" style="color: #cb5627;"><%= share.title[0..19] %>...<br></p>
@@ -42,7 +42,7 @@
                 <% end %>
               </p>
             </div>
-            <div class="col-3 col-lg-2"><%= share.price %>€ / Personne</div>
+            <div class="col-2 col-lg-1"><p><%= share.price %>€ / Pers</p></div>
           </div>
         </label>
       </div>
