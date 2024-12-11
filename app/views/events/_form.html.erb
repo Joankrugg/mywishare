@@ -42,7 +42,7 @@
                 <% end %>
               </p>
             </div>
-            <div class="col-2 col-lg-1"><p><%= share.price %>€ / Pers</p></div>
+            <div class="col-2 col-lg-1"><p><%= share.price.to_i %>€ / Pers</p></div>
           </div>
         </label>
       </div>
@@ -62,7 +62,7 @@
         <%= f.simple_fields_for :event_starters do |es_form| %>
           <div class="starter-fields">
             <div class="row">
-              <div class="col-6 col-lg_8">
+              <div class="col-7 col-lg_8">
                 <%= es_form.association :starter, label: false, collection: Starter.all,
                     label_method: ->(starter) { starter.title },
                     value_method: :id, input_html: { disabled: true } %>
@@ -71,10 +71,10 @@
               <div class="col-3 col-lg_2">
                 <%= es_form.input :quantity, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
               </div>
-              <div class="col-3 col-lg-2">
+              <div class="col-2 col-lg-2">
                 <% if es_form.object.starter.present? %>
-                  <p class="starter-price">
-                    <%= es_form.object.starter.price %> € / Pers
+                  <p class="starter-price" style= 'font-size: 12px;'>
+                    <%= es_form.object.starter.price.to_i %> € / Pers
                   </p>
                 <% end %>
               </div>
@@ -96,7 +96,7 @@
       <div class="card card-body">
         <%= f.simple_fields_for :event_desserts do |es_form| %>
           <div class="row">
-            <div class="col-6 col-lg-8">
+            <div class="col-7 col-lg-8">
               <%= es_form.association :dessert, label: false, collection: Dessert.all,
                   label_method: ->(dessert) { dessert.title },
                   value_method: :id, input_html: { disabled: true } %>
@@ -105,10 +105,10 @@
             <div class="col-3 col-lg-2">
               <%= es_form.input :quantity, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
             </div>
-            <div class="col-3 col-lg-2">
+            <div class="col-2 col-lg-2">
               <% if es_form.object.dessert.present? %>
-                <p class="dessert-price">
-                  <%= es_form.object.dessert.price %> € / Pers
+                <p class="dessert-price" style= 'font-size: 12px;'>
+                  <%= es_form.object.dessert.price.to_i %> € / Pers
                 </p>
               <% end %>
             </div>
