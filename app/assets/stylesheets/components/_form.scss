@@ -66,6 +66,7 @@
 }
 .form-actions{
   position: relative;
+  margin-bottom: 70px;
 }
 .booking{
   position: absolute;
@@ -74,8 +75,10 @@
   color: white;
   border-radius: 4px;
 }
+
 .flatpickr-day.disabled {
   background: #ccc;
   color: #fff;
   cursor: not-allowed;
 }
+
