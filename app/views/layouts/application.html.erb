@@ -61,6 +61,21 @@
         }
       });
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        flatpickr(".datepicker", {
+          enableTime: true, // Active la sélection de l'heure
+          allowInput: true, // Permet la saisie manuelle
+          onValueUpdate: function (selectedDates, dateStr, instance) {
+            instance._input.blur(); // Supprime le focus après modification
+          },
+          onClose: function (selectedDates, dateStr, instance) {
+            instance._input.blur(); // Supprime le focus à la fermeture
+          },
+        });
+      });
+    </script>
+
 
   </body>
 </html>
