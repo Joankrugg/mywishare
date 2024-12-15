@@ -11,40 +11,59 @@
       </div>
     </div>
 
-    <% Share.all.sort_by(&:title).each do |share| %>
-      <div class="squaretag-item">
-        <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
-        <label class="form-check-label collection_radio_buttons product-card" for="event_share_id_<%= share.id %>">
-          <div class="row">
-            <div class="col-3 col-lg-1">
-              <% if share.photo.present? %>
-                <%= cl_image_tag share.photo.key, height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
-              <% else %>
-                <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
-              <% end %>
-            </div>
-            <div class="col-7 col-lg-9">
-              <p class="desktop-only" style="color: #cb5627;"><%= share.title %></p>
-              <% if share.title.length > 23 %>
-                <p class="mobile-only" style="color: #cb5627;"><%= share.title[0..19] %>...<br></p>
-              <% else %>
-                <p class="mobile-only" style="color: #cb5627;"><%= share.title %><br></p>
-              <% end %>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      choisir le thème
+    </button>
 
-              <p class="desktop-only" style="font-size: 12px;"><%= share.description %></p>
-              <p class="mobile-only"style="font-size: 12px;">
-                <% if share.description.length > 25 %>
-                  <%= share.description[0..22] %>...</p>
-                <% else %>
-                  <%= share.description %></p>
-                <% end %>
-              </p>
-            </div>
-            <div class="col-2 col-lg-1"><p><%= share.price.to_i %>€ / Pers</p></div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </label>
+          <div class="modal-body">
+            <% Share.all.sort_by(&:title).each do |share| %>
+              <div class="squaretag-item">
+                <input class="form-check-input radio_buttons optional squaretag-selector share" type="radio" value="<%= share.id %>"  name="event[share_id]" id="event_share_id_<%= share.id %>">
+                <label class="form-check-label collection_radio_buttons product-card" for="event_share_id_<%= share.id %>">
+                  <div class="row">
+                    <div class="col-3 col-lg-1">
+                      <% if share.photo.present? %>
+                        <%= cl_image_tag share.photo.key, height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
+                      <% else %>
+                        <%= image_tag 'https://res.cloudinary.com/da2krghvd/image/upload/v1649843769/beertrackr/Black_circle.svg', height: 100, width: 100, crop: :fill, class: 'img-fluid beyond' %>
+                      <% end %>
+                    </div>
+                    <div class="col-7 col-lg-9">
+                      <p class="desktop-only" style="color: #cb5627;"><%= share.title %></p>
+                      <% if share.title.length > 23 %>
+                        <p class="mobile-only" style="color: #cb5627;"><%= share.title[0..19] %>...<br></p>
+                      <% else %>
+                        <p class="mobile-only" style="color: #cb5627;"><%= share.title %><br></p>
+                      <% end %>
+
+                      <p class="desktop-only" style="font-size: 12px;"><%= share.description %></p>
+                      <p class="mobile-only"style="font-size: 12px;">
+                        <% if share.description.length > 25 %>
+                          <%= share.description[0..22] %>...</p>
+                        <% else %>
+                          <%= share.description %></p>
+                        <% end %>
+                      </p>
+                    </div>
+                    <div class="col-2 col-lg-1"><p><%= share.price.to_i %>€ / Pers</p></div>
+                  </div>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    <% end %>
+    </div>
+
+
 
     <%= f.input :number_of_guests, label: false, placeholder: 'Nombre de personnes', input_html: { min: 2, max: 50 } %>
 
