@@ -6,12 +6,10 @@
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-12">
         <div class="section">
-          Choisissez le nombre de personnes et le thème de votre partage
+          Choisissez le thème de votre partage, puis le nombre de personnes présentes
         </div>
       </div>
     </div>
-
-    <%= f.input :number_of_guests, label: false, placeholder: 'Nombre de personnes', input_html: { min: 2, max: 50 } %>
 
     <% Share.all.sort_by(&:title).each do |share| %>
       <div class="squaretag-item">
@@ -47,6 +45,8 @@
         </label>
       </div>
     <% end %>
+
+    <%= f.input :number_of_guests, label: false, placeholder: 'Nombre de personnes', input_html: { min: 2, max: 50 } %>
 
 
     <div class="row" style="margin-bottom: 20px;">

@@ -1,7 +1,7 @@
 <nav class="navbar bg-light">
   <div class="container-fluid nav">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <img src="https://editor-bee.s3.eu-central-1.amazonaws.com/images/979422b2-8079-4014-8c87-8c1540c085d7/LOGO/Mywishare_Logo_Responsive_RVB_Color.png" alt="Logo" width="70" height="35" class="d-inline-block align-text-top">
+      <img src="https://editor-bee.s3.eu-central-1.amazonaws.com/images/979422b2-8079-4014-8c87-8c1540c085d7/LOGO/Mywishare_Logo_Responsive_RVB_Color.png" alt="Logo" width="100" height="35" class="d-inline-block align-text-top" style='padding: 0px 15px;'>
     <% end %>
     <% if user_signed_in? and current_user.admin?%>
       <%= link_to rails_admin_path do %>
