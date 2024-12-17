@@ -1,10 +1,11 @@
-.nav {
-  position: relative;
+nav {
+  position: fixed;
+  height: 60px;
 }
 
 .connect{
   position: absolute;
   right: 25px;
   color: #cb5627;
-  top: 15px;
+  top: 25px;
 }
