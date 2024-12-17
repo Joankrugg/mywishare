@@ -5,76 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script src="https://kit.fontawesome.com/fa92077db5.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
   </head>
 
   <body>
     <%= render "shared/flashes" %>
     <%= render 'shared/navbar' %>
     <%= yield %>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script>
-      document.addEventListener("turbo:load", function () {
-        // Vérifie si le datepicker existe sur la page
-        const arrivalPicker = document.getElementById("arrival-picker");
-        if (arrivalPicker) {
-          flatpickr(arrivalPicker, {
-            locale: "fr",                 // Localisation en français
-            enableTime: true,             // Active la sélection d'heure
-            time_24hr: true,              // Format 24h
-            dateFormat: "Y-m-d H:i",      // Format pour inclure la date et l'heure
-            minDate: new Date().fp_incr(3), // Empêche la sélection des dates avant 3 jours
-            minuteIncrement: 30,          // Incréments de 30 minutes
-            disable: [
-              function (date) {
-                // Désactiver dimanches (0), lundis (1), mardis (2), mercredis (3)
-                return [0, 1, 2, 3].includes(date.getDay());
-              },
-            ],
-            onChange: function (selectedDates, dateStr, instance) {
-              const selectedDate = selectedDates[0];
-              if (selectedDate) {
-                const hours = selectedDate.getHours();
-                const minutes = selectedDate.getMinutes();
-                const valid =
-                  (hours >= 12 && hours < 14) || // Créneau 12h à 14h
-                  (hours >= 19 && (hours < 21 || (hours === 21 && minutes <= 30))); // Créneau 19h à 21h30
 
-                if (!valid) {
-                  alert("Veuillez sélectionner un créneau entre 12h-14h ou 19h-21h30.");
-                  instance.clear(); // Efface la sélection invalide
-                }
-              }
-            },
-          });
-        }
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        flatpickr(".datepicker", {
-          enableTime: true, // Active la sélection de l'heure
-          allowInput: true, // Permet la saisie manuelle
-          onValueUpdate: function (selectedDates, dateStr, instance) {
-            instance._input.blur(); // Supprime le focus après modification
-          },
-          onClose: function (selectedDates, dateStr, instance) {
-            instance._input.blur(); // Supprime le focus à la fermeture
-          },
-        });
-      });
-    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 

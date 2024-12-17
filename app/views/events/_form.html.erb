@@ -95,38 +95,50 @@
 
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-12">
-        <div class="section" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDessert" aria-expanded="false" aria-controls="collapseDessert">
-          Choisissez vos desserts et nombre de parts
+        <div class="section" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dessertModal" data-turbo='false'>
+          Choisissez vos desserts et le nombre de parts
           <i class="fa-solid fa-chevron-down"></i>
         </div>
       </div>
     </div>
-    <div class="collapse" id="collapseDessert">
-      <div class="card card-body">
-        <%= f.simple_fields_for :event_desserts do |es_form| %>
-          <div class="row">
-            <div class="col-7 col-lg-8">
-              <%= es_form.association :dessert, label: false, collection: Dessert.all,
-                  label_method: ->(dessert) { dessert.title },
-                  value_method: :id, input_html: { disabled: true } %>
-              <%= es_form.hidden_field :dessert_id, value: es_form.object.dessert_id %>
-            </div>
-            <div class="col-3 col-lg-2">
-              <%= es_form.input :quantity, autofocus: false, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
-            </div>
-            <div class="col-2 col-lg-2">
-              <% if es_form.object.dessert.present? %>
-                <p class="dessert-price" style= 'font-size: 12px;'>
-                  <%= es_form.object.dessert.price.to_i %> € / Pers
-                </p>
-              <% end %>
-            </div>
+
+    <div class="modal fade" id="dessertModal" tabindex="-1" aria-labelledby="dessertModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="dessertModalLabel">Desserts</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        <% end %>
+          <div class="modal-body">
+            <%= f.simple_fields_for :event_desserts do |es_form| %>
+              <div class="dessert-fields">
+                <div class="row">
+                  <div class="col-7 col-lg_8">
+                    <%= es_form.association :dessert, label: false, collection: Dessert.all,
+                        label_method: ->(dessert) { dessert.title },
+                        value_method: :id, input_html: { disabled: true } %>
+                    <%= es_form.hidden_field :dessert_id, value: es_form.object.dessert_id %>
+                  </div>
+                  <div class="col-3 col-lg_2">
+                    <%= es_form.input :quantity, autofocus: false, input_html: { min: 0 }, label: false, value: es_form.object.quantity || 0 %>
+                  </div>
+                  <div class="col-2 col-lg-2">
+                    <% if es_form.object.dessert.present? %>
+                      <p class="dessert-price" style= 'font-size: 12px;'>
+                        <%= es_form.object.dessert.price.to_i %> € / Pers
+                      </p>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
+
     <div style="margin-bottom: 20px;">
-      <%= f.datetime_local_field :arrival, id: "arrival-picker", class: "form-control", placeholder: "Date et heure d'arrivée" %>
+      <%= f.datetime_local_field :arrival, id: "arrival-picker", class: "form-control datepicker", placeholder: "Date et heure d'arrivée", name: "event[arrival]" %>
     </div>
 
 

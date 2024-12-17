@@ -82,3 +82,13 @@
   cursor: not-allowed;
 }
 
+.flatpickr-calendar {
+  z-index: 9999 !important; /* Augmenter la priorité d'affichage */
+  position: absolute !important;
+  top: 4190px;/* Pour éviter un positionnement relatif ou fixe mal géré */
+}
+
+input[data-input] {
+  position: relative; /* Permet au datepicker de se positionner par rapport à l'input */
+  z-index: 10; /* Permet au champ de formulaire d'apparaître au-dessus du calendrier */
+}
