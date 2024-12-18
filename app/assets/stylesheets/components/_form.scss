@@ -85,7 +85,9 @@
 .flatpickr-calendar {
   z-index: 9999 !important; /* Augmenter la priorité d'affichage */
   position: absolute !important; /* Pour éviter un positionnement relatif ou fixe mal géré */
+  transform: translateY(3780px); /* For better rendering on iOS */
 }
+
 
 input[data-input] {
   position: relative; /* Permet au datepicker de se positionner par rapport à l'input */
