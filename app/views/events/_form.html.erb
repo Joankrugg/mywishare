@@ -23,11 +23,11 @@
               <% end %>
             </div>
             <div class="col-7 col-lg-9">
-              <p class="desktop-only" style="color: #cb5627;"><%= share.title %></p>
+              <p class="desktop-only title"><%= share.title %></p>
               <% if share.title.length > 23 %>
-                <p class="mobile-only" style="color: #cb5627;"><%= share.title[0..19] %>...<br></p>
+                <p class="mobile-only title"><%= share.title[0..19] %>...<br></p>
               <% else %>
-                <p class="mobile-only" style="color: #cb5627;"><%= share.title %><br></p>
+                <p class="mobile-only title"><%= share.title %><br></p>
               <% end %>
 
               <p class="desktop-only" style="font-size: 12px;"><%= share.description %></p>
