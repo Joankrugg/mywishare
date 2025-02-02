@@ -19,3 +19,12 @@ document.addEventListener("turbo:load", function () {
     ]
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isInWebView = !window.navigator.standalone && !document.referrer && window.webkit && window.webkit.messageHandlers;
+
+    if (isIOS && isInWebView) {
+        document.documentElement.classList.add('ios-webview');
+    }
+});
