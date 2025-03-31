@@ -1,35 +1,45 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="text-center text-dark mb-4">Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "ios-form" }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :email, required: true, autofocus: true, input_html: { class: "form-control ios-input" } %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <p class="text-muted small">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
     <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
+                hint: "Leave it blank if you don't want to change it",
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password", class: "form-control ios-input" } %>
+
     <%= f.input :password_confirmation,
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password", class: "form-control ios-input" } %>
+
     <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
+                hint: "We need your current password to confirm your changes",
                 required: true,
-                input_html: { autocomplete: "current-password" } %>
+                input_html: { autocomplete: "current-password", class: "form-control ios-input" } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <div class="form-actions text-center">
+    <%= f.button :submit, "Update", class: "btn ios-btn mt-3" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3 class="mt-5 text-danger">Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+<div class="text-center">
+  <%= button_to "Cancel my account", registration_path(resource_name),
+                data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" },
+                method: :delete,
+                class: "btn btn-outline-danger w-100 mt-2" %>
+</div>
 
-<%= link_to "Back", :back %>
+<div class="text-center mt-3">
+  <%= link_to "Back", :back, class: "text-muted small" %>
+</div>
+

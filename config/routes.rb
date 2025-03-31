@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'pages/home'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
 
-  root to: "events#index"
+  root to: "pages#home"
   resources :events, except: [:index, :edit]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

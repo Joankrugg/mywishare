@@ -27,7 +27,10 @@ gem 'ffi', '<= 1.16.0'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 gem "devise"
-
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-instagram'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 gem "dotenv-rails"
