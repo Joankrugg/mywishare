@@ -39,3 +39,5 @@
 /node_modules
 app/assets/videos/millesimelife.mp4
 app/assets/videos/millesimelife.mp4
+app/assets/videos/*
+*.DS_Store
