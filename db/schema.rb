@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_09_180112) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_15_125030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_09_180112) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "desserts", force: :cascade do |t|
@@ -92,6 +98,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_09_180112) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "price"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
   create_table "shares", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -131,4 +148,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_09_180112) do
   add_foreign_key "event_starters", "starters"
   add_foreign_key "events", "organizers"
   add_foreign_key "events", "shares"
+  add_foreign_key "products", "categories"
 end

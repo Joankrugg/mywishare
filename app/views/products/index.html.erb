@@ -1,0 +1,8 @@
+<% @products.each do |c| %>
+  <div class="row">
+    <%= c.name %>
+    <% if c.category.present? %>
+      <%= c.category.name %>
+    <% end %>
+  </div>
+<% end %>
